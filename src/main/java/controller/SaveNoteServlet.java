@@ -33,7 +33,10 @@ public class SaveNoteServlet extends HttpServlet {
 			Note note = new Note(title, content, new Date());
 			NoteDao dao = new NoteDao();
 			dao.SaveNote(note);
-			
+			response.setContentType("text/html");
+			PrintWriter out = response.getWriter();
+			out.println("<h1 style='text-align:center;'>Note Added Successfully</h1>");
+			out.println("<h1 style='text-align:center;'><a href='index.jsp'>View all note</a></h1>");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
