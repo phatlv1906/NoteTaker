@@ -19,15 +19,12 @@ public class NoteDao {
 		ts.commit();
 		session.close();
 	}
-	public void getAllNote() {
+	public void DeleteNote(int id) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction ts = session.beginTransaction();
-		Query q = session.createQuery("from Note");
-		List<Note> listNote = q.getResultList();
-		
-		for(Note note:listNote) {
-			System.out.println(note.getId() + " " + note.getTitle());
-		}
-		
+		Note note = session.get(Note.class, id);
+		session.delete(note);
+		ts.commit();
+		session.close();
 	}
 }

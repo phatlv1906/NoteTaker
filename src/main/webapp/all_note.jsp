@@ -14,7 +14,7 @@
 <%@include file="all_js_css.jsp" %>
 </head>
 <body>
-	<div class="container-fluid p-0">
+	<div class="container">
     	<%@include file="Navbar.jsp"%>
     	<br>
     	<h1>All Note: </h1>
@@ -24,16 +24,17 @@
 				Session s = HibernateUtil.getSessionFactory().openSession();
 				Transaction ts = s.beginTransaction();
 				Query q = s.createQuery("from Note");
-				List<Note> listNote = q.getResultList();
+				List<Note> listNote = q.list();
 				for(Note note:listNote){
-					
-				
 			%>
-				<div class="card" style="width: 18rem;">
-				  <div class="card-body">
-				    <h5 class="card-title"><%note.getTitle();%></h5>
-				    <p class="card-text"><%note.getContent();%></p>
-				    <a href="#" class="btn btn-primary">Update</a>
+				<div class="card">
+				  <div class="card-body px-5">
+				    <h5 class="card-title"><%=note.getTitle()%></h5>
+				    <p class="card-text"><%=note.getContent()%></p>
+				    <div class="container text-right">
+				    	<a href="#" class="btn btn-primary">Update</a>
+				    	<a href="DeleteNoteServlet?note_id=<%=note.getId()%>" class="btn btn-danger">Delete</a>
+				    </div>
 				  </div>
 				</div>
 				
